@@ -3,7 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 src/main/resources/application.properties
-.log
+auction_platform.log
 
 ### STS ###
 .apt_generated
