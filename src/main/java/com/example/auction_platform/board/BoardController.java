@@ -16,7 +16,6 @@ public class BoardController {
     Logger logger = LoggerFactory.getLogger(BoardController.class);
     @GetMapping
     public List<Product> getAllProducts() {
-        logger.info("Have got all products");
         return productRepository.findAll();
     }
     @GetMapping("product")
