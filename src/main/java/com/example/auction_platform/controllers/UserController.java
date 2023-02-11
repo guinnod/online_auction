@@ -3,10 +3,13 @@ package com.example.auction_platform.controllers;
 import com.example.auction_platform.models.User;
 import com.example.auction_platform.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+/**
+ * @author Abzal Slamkozha
+ */
 
 @RestController
 @RequestMapping(path = "user")
@@ -15,18 +18,11 @@ public class UserController {
 
     private final UserRepository userRepository;
 
-    @GetMapping()
-    public List<User> getUser() {
-        return userRepository.findAll();
-    }
-
-    @GetMapping("id")
-    public User getUser(@RequestParam(value = "email", defaultValue = "null") String email) {
-        return userRepository.findByEmail(email);
-    }
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("add")
     public User getUser(@RequestBody User user) {
+        logger.info("User: " + user + " saved!");
         return userRepository.save(user);
     }
 }

@@ -6,6 +6,8 @@ import com.example.auction_platform.models.User;
 import com.example.auction_platform.repositories.BulletinRepository;
 import com.example.auction_platform.repositories.SellRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,7 @@ import java.io.IOException;
 public class BulletinController {
     private final BulletinRepository bulletinRepository;
     private final SellRepository sellRepository;
-
+    private final Logger logger = LoggerFactory.getLogger(BoardController.class);
     @PostMapping("add")
     public String add(@RequestParam("name") String name,
                            @RequestParam("description") String description,
@@ -31,6 +33,7 @@ public class BulletinController {
                            @RequestParam("image") MultipartFile file) throws IOException {
         Bulletin bulletin = new Bulletin(name, description, minPrice, file.getBytes());
         bulletinRepository.save(bulletin);
+        logger.info("Product: " + bulletin + "added!");
         return "Successfully added!";
     }
 
