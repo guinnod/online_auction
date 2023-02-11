@@ -8,6 +8,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author Abzal Slamkozha
+ */
+
 @SpringBootApplication
 @EnableSwagger2
 public class AuctionPlatformApplication {
@@ -15,6 +19,7 @@ public class AuctionPlatformApplication {
     public static void main(String[] args) {
         SpringApplication.run(AuctionPlatformApplication.class, args);
     }
+
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2).select()

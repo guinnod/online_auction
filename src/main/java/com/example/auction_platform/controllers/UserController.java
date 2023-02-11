@@ -1,24 +1,30 @@
-package com.example.auction_platform.user;
+package com.example.auction_platform.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.auction_platform.models.User;
+import com.example.auction_platform.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping(path = "user")
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
-    @GetMapping
-    public List<User> getAllUsers(){
+
+    private final UserRepository userRepository;
+
+    @GetMapping()
+    public List<User> getUser() {
         return userRepository.findAll();
     }
+
     @GetMapping("id")
     public User getUser(@RequestParam(value = "email", defaultValue = "null") String email) {
         return userRepository.findByEmail(email);
     }
+
     @PostMapping("add")
     public User getUser(@RequestBody User user) {
         return userRepository.save(user);

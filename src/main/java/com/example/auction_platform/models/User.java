@@ -1,25 +1,22 @@
-package com.example.auction_platform.user;
+package com.example.auction_platform.models;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+
+/**
+ * @author Abzal Slamkozha
+ */
+
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Data
 public class User implements UserDetails {
-    @Getter
-    @Setter
     private String email;
-    @Getter
-    @Setter
     private String password;
 
-    public User(User user) {
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
