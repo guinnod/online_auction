@@ -4,10 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * @author Abzal Slamkozha
  */
@@ -18,19 +14,21 @@ public class Bulletin {
     private String name;
     private String description;
     private int minPrice;
+    private int duration;
     @JsonIgnore
     private byte[] image;
     private int currentPrice;
     private boolean isActive;
     private long endTime;
 
-    public Bulletin(String name, String description, int minPrice, byte[] image) {
+    public Bulletin(String name, String description, int minPrice, int duration, byte[] image) {
         this.name = name;
         this.description = description;
         this.minPrice = minPrice;
+        this.duration = duration;
         this.image = image;
         this.currentPrice = this.minPrice;
         this.isActive = true;
-        this.endTime = System.currentTimeMillis() + 12000;
+        this.endTime = System.currentTimeMillis() + duration;
     }
 }
