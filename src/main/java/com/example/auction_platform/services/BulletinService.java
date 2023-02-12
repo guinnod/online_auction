@@ -49,7 +49,14 @@ public class BulletinService {
         }
         bulletin.setCurrentPrice(bulletin.getCurrentPrice() + price);
         bulletinRepository.save(bulletin);
+        try {
+            String previousUser = sellRepository.findByProductName(name).getEmail();
+            logger.info("To: " + previousUser + "Text: Your bidder was lost");
+        } catch (Exception ignored) {
+
+        }
         sellRepository.save(new Sell(user.getUsername(), name));
+        logger.info(user.getUsername() + " update price to " + price + " KZT for " + bulletin.getName());
         return "Successfully price updated!";
     }
 }

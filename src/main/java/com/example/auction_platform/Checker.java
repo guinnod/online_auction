@@ -24,10 +24,19 @@ public class Checker {
         List<Bulletin> bulletins = bulletinRepository.findAllByIsActive(true);
         for (Bulletin bulletin: bulletins) {
             if (System.currentTimeMillis() > bulletin.getEndTime()) {
-                Sell sell = sellRepository.findByProductName(bulletin.getName());
-                sendToEmail.info("User " + sell.getEmail() + " have bought " + bulletin.getName() + ".");
-                bulletin.setActive(false);
-                bulletinRepository.save(bulletin);
+                try {
+                    Sell sell = sellRepository.findByProductName(bulletin.getName());
+                    sendToEmail.info("To: " + bulletin.getAuthor() + " Text: User " + sell.getEmail() + " has bought " + bulletin.getName() + ".");
+                    sendToEmail.info("To: " + sell.getEmail() + " Text: Congratulations! You have bought " + bulletin.getName() + ".");
+                    bulletin.setActive(false);
+                    bulletinRepository.save(bulletin);
+                } catch (Exception ignored) {
+
+                } finally {
+                    bulletin.setActive(false);
+                    bulletinRepository.save(bulletin);
+                }
+
             }
         }
     }

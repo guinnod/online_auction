@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Data
 @AllArgsConstructor
 public class Sell {
-    @MongoId
     private String email;
+    @MongoId
     private String productName;
 }
