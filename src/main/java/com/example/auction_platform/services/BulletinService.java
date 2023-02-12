@@ -51,7 +51,7 @@ public class BulletinService {
         bulletinRepository.save(bulletin);
         try {
             String previousUser = sellRepository.findByProductName(name).getEmail();
-            logger.info("To: " + previousUser + "Text: Your bidder was lost");
+            logger.info("To: " + previousUser + " Text: Your bidder was lost");
         } catch (Exception ignored) {
 
         }
