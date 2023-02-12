@@ -8,5 +8,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 
 public interface SellRepository extends MongoRepository<Sell, String> {
-    // public Sell findByNameAndEmail(String productName, String email);
+    public Sell findByProductName(String productName);
 }

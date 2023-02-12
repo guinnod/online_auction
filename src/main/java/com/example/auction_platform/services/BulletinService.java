@@ -31,7 +31,10 @@ public class BulletinService {
                       int minPrice,
                       int duration,
                       MultipartFile file) throws IOException {
-        Bulletin bulletin = new Bulletin(name, description, minPrice, duration, file.getBytes());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        Bulletin bulletin = new Bulletin(name, description, minPrice,
+                duration, user.getUsername(), file.getBytes());
         bulletinRepository.save(bulletin);
         logger.info("Product: " + bulletin.getName() + " added!");
         return "Successfully added!";
@@ -41,6 +44,9 @@ public class BulletinService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
         Bulletin bulletin = bulletinRepository.findByName(name);
+        if (!bulletin.isActive()) {
+            return "This bulletin have been sold";
+        }
         bulletin.setCurrentPrice(bulletin.getCurrentPrice() + price);
         bulletinRepository.save(bulletin);
         sellRepository.save(new Sell(user.getUsername(), name));
