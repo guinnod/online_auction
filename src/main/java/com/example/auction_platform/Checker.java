@@ -36,7 +36,6 @@ public class Checker {
                     bulletin.setActive(false);
                     bulletinRepository.save(bulletin);
                 }
-
             }
         }
     }
